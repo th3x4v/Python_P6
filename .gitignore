@@ -1,0 +1,9 @@
+
+# ignore all files in any directory named OCMovies-API-EN-FR
+OCMovies-API-EN-FR/
+
+# ignore all .csv files
+*.csv
+
+# ignore all files
+**/.DS_Store

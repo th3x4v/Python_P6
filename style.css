@@ -1,0 +1,40 @@
+/* Style pour la barre d'accueil */
+.navbar {
+    background-color: #f1f1f1;
+    padding: 10px;
+}
+
+.navbar img {
+    max-width: 50px;
+    margin-right: 10px;
+}
+
+/* Style pour la zone de la photo */
+.photo {
+    text-align: center;
+    margin: 20px 0;
+}
+
+.photo img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Style pour le carrousel */
+.carousel {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.carousel img {
+    max-width: 100px;
+    margin: 0 10px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+}
+
+.carousel img:hover {
+    border-color: #555;
+}
