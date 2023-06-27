@@ -1,9 +1,14 @@
 
 # ignore all files in any directory named OCMovies-API-EN-FR
 OCMovies-API-EN-FR/
+example/
+.idea/
 
 # ignore all .csv files
 *.csv
 
 # ignore all files
 **/.DS_Store
+
+script_old.js
+script_old2.js
