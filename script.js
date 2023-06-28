@@ -41,18 +41,62 @@ class Carousel {
         this.element = element
         this.options = Object.assign({ slideToScroll: 7, slideVisible: 3 }, options)
         this.children = [].slice.call(element.children)
+        this.currentItem =0
         let ratio = this.children.length / this.options.slideVisible
-        let root = this.createDivWithClass('carousel')
-        let container = this.createDivWithClass('carousel-container')
-        container.style.width = (ratio *100) + "%"
-        root.appendChild(container)
-        this.element.appendChild(root)
-        this.children.forEach((child) => { 
+        this.root = this.createDivWithClass('carousel')
+        this.container = this.createDivWithClass('carousel-container')
+        this.container.style.width = (ratio * 100) + "%"
+        this.container.style.marginLeft = "35px"
+        this.root.appendChild(this.container)
+        this.element.appendChild(this.root)
+        this.children.forEach((child) => {
             let div = this.createDivWithClass('carousel-item');
-            div.style.width = ((100/ this.options.slideVisible) / ratio) +"%"
+            div.style.width = ((100 / this.options.slideVisible) / ratio) + "%"
             div.appendChild(child);
-            container.appendChild(div);
+            this.container.appendChild(div);
         })
+        this.createNavigation()
+    }
+    
+
+    scrollToNextSlide() {
+        this.currentItem ++;
+        this.scrollToCurrentSlide();
+        }
+    
+    // Scroll to the previous slide
+    scrollToPrevSlide() {
+        this.currentItem --;
+        if (this.currentItem < 0) {
+            this.currentItem = 0;
+    }
+        this.scrollToCurrentSlide();
+    }
+
+    // Scroll to the current slide
+    scrollToCurrentSlide() {
+        let translateX = this.currentItem * (-100/ this.children.length)
+        this.container.style.transform = `translateX(${translateX}%)`;
+    }
+ 
+
+    createNavigation() {
+        let nextButton = document.createElement("button");
+        nextButton.textContent = "Next";
+        nextButton.className = "carousel-next";
+        this.root.appendChild(nextButton);
+        nextButton.style.width = '72px';
+        nextButton.style.height = '35px';
+    
+        let prevButton = document.createElement("button");
+        prevButton.textContent = "Previous";
+        prevButton.className = "carousel-prev";
+        this.root.appendChild(prevButton);
+        prevButton.style.width = '72px';
+        prevButton.style.height = '35px';
+
+        prevButton.addEventListener("click", () => this.scrollToPrevSlide());
+        nextButton.addEventListener("click", () => this.scrollToNextSlide());
 
     }
 
@@ -69,6 +113,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     new Carousel(document.querySelector('#best-movies'), {
         slideToScroll: 7,
-        slideVisible: 3
+        slideVisible: 4
     })
 })

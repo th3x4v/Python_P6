@@ -41,6 +41,7 @@
 .carousel {
     position: relative;
     overflow: hidden;
+    margin-left: 0px;
 }
 
 .carousel-item {
@@ -48,8 +49,32 @@
 }
 
 
-.carousel-container ::after {
-content:'';
-clear: both;
-display: table;
+/*  .carousel-container ::after {
+    content: '';
+    clear: both;
+    display: table;
+    margin-left: 60px;
+}  */
+.carousel {
+    position: relative;
+}
+
+.carousel-next,
+.carousel-prev {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.carousel-next {
+    right: 10px;
+}
+
+.carousel-prev {
+    left: 10px;
 }
