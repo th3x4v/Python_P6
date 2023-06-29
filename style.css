@@ -55,9 +55,10 @@
     display: table;
     margin-left: 60px;
 }  */
-.carousel {
-    position: relative;
+.carousel-container {
+    transition: transform 0.3s ease-in-out;
 }
+
 
 .carousel-next,
 .carousel-prev {
