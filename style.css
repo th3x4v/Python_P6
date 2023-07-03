@@ -27,15 +27,14 @@
 }
 
 /* Style pour la zone de la photo */
-.photo {
+#best-movie {
     text-align: center;
     margin: 20px 0;
 
 }
 
-.photo img {
-    max-width: 100%;
-    height: auto;
+body {
+    background-color: aqua;
 }
 
 /* Style pour le carrousel */
@@ -49,17 +48,9 @@
     float: left;
 }
 
-
-/*  .carousel-container ::after {
-    content: '';
-    clear: both;
-    display: table;
-    margin-left: 60px;
-}  */
 .carousel-container {
     transition: transform 0.3s ease-in-out;
 }
-
 
 .carousel-next,
 .carousel-prev {
@@ -79,4 +70,86 @@
 
 .carousel-prev {
     left: 10px;
+}
+
+/* CSS styles for the modal */
+#modalContainer {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+
+}
+
+#openModalButton {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    margin: 10px;
+}
+
+@font-face {
+    font-family: 'Custom Font';
+    src: url('path/to/font.woff') format('woff');
+}
+
+.modal-content {
+    font-family: 'Custom Font', sans-serif;
+    background-color: black;
+    color: white;
+    margin: 15% auto;
+    padding: 20px;
+    border-radius: 10px;
+    width: 50%;
+}
+
+#modalTitle {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+#modalImage {
+    border-radius: 10px;
+    box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.4);
+    float: right;
+    height: 340px;
+    margin-right: 120px;
+    margin-top: 1%;
+}
+
+#modalDescription {
+    margin-bottom: 10px;
+}
+
+#modalGenre,
+#modalReleaseDate,
+#modalRated,
+#modalImdbScore,
+#modalDirector,
+#modalActors,
+#modalDuration,
+#modalCountry,
+#modalBoxOffice {
+    margin-bottom: 5px;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
 }

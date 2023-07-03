@@ -22,7 +22,83 @@ async function getMovies(url) {
     return data
 }
 
+async function getMovie(url) {
+    const jsonData = await getData(url)
+    return jsonData
+}
 
+function openModal(movie) {
+    const modalContainer = document.getElementById("modalContainer");
+    const closeModalButton = document.getElementsByClassName("close")[0];
+    const modalTitle = document.getElementById("modalTitle");
+    const modalImage = document.getElementById("modalImage");
+    const modalDescription = document.getElementById("modalDescription");
+    const modalGenre = document.getElementById("modalGenre");
+    const modalReleaseDate = document.getElementById("modalReleaseDate");
+    const modalRated = document.getElementById("modalRated");
+    const modalImdbScore = document.getElementById("modalImdbScore");
+    const modalDirector = document.getElementById("modalDirector");
+    const modalActors = document.getElementById("modalActors");
+    const modalDuration = document.getElementById("modalDuration");
+    const modalCountry = document.getElementById("modalCountry");
+    const modalBoxOffice = document.getElementById("modalBoxOffice");
+
+    // Function to open the modal and populate it with movie information
+
+    modalTitle.textContent = movie.original_title;
+    modalImage.src = movie.image_url;
+    modalDescription.textContent = movie.description;
+    modalGenre.textContent = movie.genres.join(", ");
+    modalReleaseDate.textContent = movie.date_published;
+    modalRated.textContent = movie.rated;
+    modalImdbScore.textContent = movie.imdb_score;
+    modalDirector.textContent = movie.directors.join(", ");
+    modalActors.textContent = movie.actors.join(", ");
+    modalDuration.textContent = movie.duration;
+    modalCountry.textContent = movie.countries.join(", ");
+    modalBoxOffice.textContent = movie.worldwide_gross_income;
+    modalContainer.style.display = "block";
+
+    // Event listener to close the modal when the close button is clicked
+    closeModalButton.addEventListener("click", function () {
+        modalContainer.style.display = "none";
+    });
+
+    // Event listener to close the modal when the user clicks outside the modal
+    window.addEventListener("click", function (event) {
+        if (event.target == modalContainer) {
+            modalContainer.style.display = "none";
+        }
+    });
+}
+
+async function createBestMovies() {
+
+    let movie = await getMovies(urlsBestMovies)
+    let movie_ = movie[0];
+    let dataMovie = await getMovie(movie_.url)
+    let container = document.getElementById("best-movie");
+
+    const pElement = document.createElement("p");
+    pElement.textContent = dataMovie.original_title;
+
+    const imgElement = document.createElement("img");
+    imgElement.src = dataMovie.image_url;
+    imgElement.alt = "Image";
+
+    const openModalButton = document.createElement("button");
+    openModalButton.id = "openModal";
+    openModalButton.textContent = "INFOS";
+
+    container.appendChild(pElement);
+    container.appendChild(imgElement);
+    container.appendChild(openModalButton);
+
+    // Event listener to open the modal when the button is clicked
+    openModalButton.addEventListener("click", function () {
+        openModal(dataMovie);
+    });
+}
 
 class Carousel {
     /** 
@@ -36,9 +112,9 @@ class Carousel {
         this.container = this.createDivWithClass('carousel-container')
         this.children = [];
         this.currentItem = 0
-        let ratio = this.movies.length / this.options.slideVisible
+        this.ratio = this.movies.length / this.options.slideVisible
         this.root = this.createDivWithClass('carousel')
-        this.container.style.width = (ratio * 100) + "%"
+        this.container.style.width = (this.ratio * 100) + "%"
         this.container.style.marginLeft = "35px"
         this.root.appendChild(this.container)
         this.element.appendChild(this.root)
@@ -48,10 +124,12 @@ class Carousel {
     }
 
     createCarouselStructure() {
-        this.movies.forEach((movie) => {
+        this.movies.forEach(async (movie) => {
             const { title, image_url } = movie;
+            let dataMovie = await getMovie(movie.url);
 
             const divElement = this.createDivWithClass("carousel-item")
+            divElement.style.width = ((100 / this.options.slideVisible) / this.ratio) + "%"
 
             const pElement = document.createElement("p");
             pElement.textContent = title;
@@ -59,10 +137,13 @@ class Carousel {
             const imgElement = document.createElement("img");
             imgElement.src = image_url;
             imgElement.alt = "Image";
+            debugger;
+            imgElement.addEventListener("click", () => {
+                openModal(dataMovie);
+            });
 
             divElement.appendChild(pElement);
             divElement.appendChild(imgElement);
-            debugger;
             this.container.appendChild(divElement);
             this.children.push(divElement);
         });
@@ -126,18 +207,15 @@ async function createCarousel(url, categorie) {
     });
 }
 
+
+
+
+createBestMovies()
 createCarousel(urlsBestDrama, "best-drama");
 createCarousel(urlsBestMovies, "best-movies");
 createCarousel(urlsBestScifi, "best-scifi");
 createCarousel(urlsBestFantasy, "best-fantasy");
 
-
-
-
-//new Carousel(document.querySelector('#best-fantasy'), {
-//    slideToScroll: 7,
- //   slideVisible: 4
-//})
 
 
 
