@@ -1,108 +1,27 @@
-const urlsBestFantasy = "http://localhost:8000/api/v1/titles/?actor=&actor_contains=&company=&company_contains=&country=&country_contains=&director=&director_contains=&genre=&genre_contains=fantasy&imdb_score=&imdb_score_max=&imdb_score_min=&lang=&lang_contains=&max_year=&min_year=&page=2&rating=&rating_contains=&sort_by=-imdb_score&title=&title_contains=&writer=&writer_contains=&year="
-
-function populateCarouselContainer() {
-    const imageContainer = document.getElementById("best-fantasy");
-    fetch("http://localhost:8000/api/v1/titles/?sort_by=-imdb_score&genre_contains=drama&page_size=8")
-        .then(response => response.json())
-        .then(data => {
-            // Récupérer les 7 premiers résultats
-            const results = data.results.slice(0, 7);
-            console.log(results);
-            // Utiliser les résultats comme vous le souhaitez
-            // ...
-            // Loop through the image URLs and create <img> elements
-            for (let i = 0; i < results.length; i++) {
-                const movie = results[i];
-                const imageUrl = movie.image_url;
-
-                // Create a <div> element
-                const divElement = document.createElement("div");
-
-                // Create a <div> element
-                const pElement = document.createElement("p");
-                pElement.innerHTML = "titre"
+const urlsBestDrama = "http://localhost:8000/api/v1/titles/?sort_by=-imdb_score&genre_contains=drama&page_size=15"
+const urlsBestMovies = "http://localhost:8000/api/v1/titles/?sort_by=-imdb_score&page_size=15"
+const urlsBestScifi = "http://localhost:8000/api/v1/titles/?sort_by=-imdb_score&genre_contains=sci-fi&page_size=15"
+const urlsBestFantasy = "http://localhost:8000/api/v1/titles/?sort_by=-imdb_score&genre_contains=fantasy&page_size=15"
 
 
-
-                // Create an <img> element
-                const imgElement = document.createElement("img");
-                imgElement.src = imageUrl;
-                imgElement.alt = "Image " + (i + 1);
-
-                imgElement.style.width = '273px';
-                imgElement.style.height = '402px';
-
-                // Create an <a> element
-                const aElement = document.createElement("a");
-                aElement.href = imageUrl; // Set the href to the URL you want to navigate to
-
-                // Append the <img> element to the <a> element
-                aElement.appendChild(imgElement);
-
-                // Append the <a> element to the <div>
-                divElement.appendChild(pElement);
-                divElement.appendChild(aElement);
-
-                // Append the <div> element to the image container
-                imageContainer.appendChild(aElement);
-
-            }
-        });
-}
-
-
-
-function populateCarouselContainer_old() {
-    const imageContainer = document.getElementById("best-movies");
-    // Array of image URLs
-    const imageUrls = ["https://m.media-amazon.com/images/M/MV5BMjEwNzM1MjA1MF5BMl5BanBnXkFtZTcwMjcwMzIyMQ@@._V1_UY268_CR3,0,182,268_AL_.jpg",
-        "https://m.media-amazon.com/images/M/MV5BMTY3Njc5MDIzMl5BMl5BanBnXkFtZTcwNzA5ODQyMQ@@._V1_UY268_CR1,0,182,268_AL_.jpg",
-        "https://m.media-amazon.com/images/M/MV5BMGVjYWE5MTAtMTY4ZS00OWVhLWJhNmQtYWY4ZTUzZjZiMTY5XkEyXkFqcGdeQXVyMjExMjI5NzI@._V1_UX182_CR0,0,182,268_AL_.jpg",
-        "https://m.media-amazon.com/images/M/MV5BZWI4NTA0MGQtZGE2Yi00ZDc0LTkyNTItNjE1ZGMxYWZjOTkxXkEyXkFqcGdeQXVyNzAyNTY2MjY@._V1_UY268_CR108,0,182,268_AL_.jpg",
-        "https://m.media-amazon.com/images/M/MV5BZWI4NTA0MGQtZGE2Yi00ZDc0LTkyNTItNjE1ZGMxYWZjOTkxXkEyXkFqcGdeQXVyNzAyNTY2MjY@._V1_UY268_CR108,0,182,268_AL_.jpg",
-        "https://m.media-amazon.com/images/M/MV5BZWI4NTA0MGQtZGE2Yi00ZDc0LTkyNTItNjE1ZGMxYWZjOTkxXkEyXkFqcGdeQXVyNzAyNTY2MjY@._V1_UY268_CR108,0,182,268_AL_.jpg",
-        "https://m.media-amazon.com/images/M/MV5BZWI4NTA0MGQtZGE2Yi00ZDc0LTkyNTItNjE1ZGMxYWZjOTkxXkEyXkFqcGdeQXVyNzAyNTY2MjY@._V1_UY268_CR108,0,182,268_AL_.jpg"];
-
-    // Loop through the image URLs and create <img> elements
-    for (let i = 0; i < imageUrls.length; i++) {
-        const imageUrl = imageUrls[i];
-
-        // Create a <div> element
-        const divElement = document.createElement("div");
-
-        // Create a <div> element
-        const pElement = document.createElement("p");
-        pElement.innerHTML = "titre"
-
-
-
-        // Create an <img> element
-        const imgElement = document.createElement("img");
-        imgElement.src = imageUrl;
-        imgElement.alt = "Image " + (i + 1);
-
-        imgElement.style.width = '273px';
-        imgElement.style.height = '402px';
-
-        // Create an <a> element
-        const aElement = document.createElement("a");
-        aElement.href = imageUrl; // Set the href to the URL you want to navigate to
-
-        // Append the <img> element to the <a> element
-        aElement.appendChild(imgElement);
-
-        // Append the <a> element to the <div>
-        divElement.appendChild(pElement);
-        divElement.appendChild(aElement);
-
-        // Append the <div> element to the image container
-        imageContainer.appendChild(aElement);
-
+async function getData(url) {
+    const response = await fetch(url);
+    console.log('response:>> ', response);
+    if (!response.ok) {
+        throw console.log("Une erreur est survenue lors de la requete. Code erreur:" +
+            response.status
+        );
     }
-
+    const jsonData = await response.json();
+    return jsonData
 }
-populateCarouselContainer()
-populateCarouselContainer_old()
+async function getMovies(url) {
+    const jsonData = await getData(url)
+    let data = jsonData.results
+    data = data.slice(0, 7);
+    return data
+}
+
 
 
 class Carousel {
@@ -110,28 +29,44 @@ class Carousel {
      * @param (HTMLElement) element
      * @param (Objet) options
     */
-    constructor(element, options = {}) {
-        this.element = element
+    constructor(movies, imageContainer, options = {}) {
+        this.movies = movies
+        this.element = imageContainer
         this.options = Object.assign({ slideToScroll: 7, slideVisible: 3 }, options)
-        this.children = [].slice.call(element.children)
-        this.currentItem = 0
-        let ratio = this.children.length / this.options.slideVisible
-        this.root = this.createDivWithClass('carousel')
         this.container = this.createDivWithClass('carousel-container')
+        this.children = [];
+        this.currentItem = 0
+        let ratio = this.movies.length / this.options.slideVisible
+        this.root = this.createDivWithClass('carousel')
         this.container.style.width = (ratio * 100) + "%"
         this.container.style.marginLeft = "35px"
         this.root.appendChild(this.container)
         this.element.appendChild(this.root)
-        debugger;
-        this.children.forEach((child) => {
-            let div = this.createDivWithClass('carousel-item');
-            div.style.width = ((100 / this.options.slideVisible) / ratio) + "%"
-            div.appendChild(child);
-            this.container.appendChild(div);
-        })
+
+        this.createCarouselStructure()
         this.createNavigation()
     }
 
+    createCarouselStructure() {
+        this.movies.forEach((movie) => {
+            const { title, image_url } = movie;
+
+            const divElement = this.createDivWithClass("carousel-item")
+
+            const pElement = document.createElement("p");
+            pElement.textContent = title;
+
+            const imgElement = document.createElement("img");
+            imgElement.src = image_url;
+            imgElement.alt = "Image";
+
+            divElement.appendChild(pElement);
+            divElement.appendChild(imgElement);
+            debugger;
+            this.container.appendChild(divElement);
+            this.children.push(divElement);
+        });
+    }
 
     scrollToNextSlide() {
         this.currentItem++;
@@ -182,16 +117,27 @@ class Carousel {
 }
 
 
-
-document.addEventListener("DOMContentLoaded", function () {
-    new Carousel(document.querySelector('#best-fantasy'), {
+async function createCarousel(url, categorie) {
+    let movies = await getMovies(url);
+    let imageContainer = document.getElementById(categorie);
+    new Carousel(movies, imageContainer, {
         slideToScroll: 7,
         slideVisible: 4
-    })
+    });
+}
 
-    new Carousel(document.querySelector('#best-movies'), {
-        slideToScroll: 7,
-        slideVisible: 4
-    })
+createCarousel(urlsBestDrama, "best-drama");
+createCarousel(urlsBestMovies, "best-movies");
+createCarousel(urlsBestScifi, "best-scifi");
+createCarousel(urlsBestFantasy, "best-fantasy");
 
-})
+
+
+
+//new Carousel(document.querySelector('#best-fantasy'), {
+//    slideToScroll: 7,
+ //   slideVisible: 4
+//})
+
+
+
