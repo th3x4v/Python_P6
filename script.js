@@ -73,7 +73,6 @@ function openModal(movie) {
 }
 
 async function createBestMovies() {
-
     let movie = await getMovies(urlsBestMovies)
     let movie_ = movie[0];
     let dataMovie = await getMovie(movie_.url)
@@ -85,6 +84,9 @@ async function createBestMovies() {
     const imgElement = document.createElement("img");
     imgElement.src = dataMovie.image_url;
     imgElement.alt = "Image";
+    imgElement.style.width = '364px';
+    imgElement.style.height = '536px';
+
 
     const openModalButton = document.createElement("button");
     openModalButton.id = "openModal";
@@ -106,6 +108,7 @@ class Carousel {
      * @param (Objet) options
     */
     constructor(movies, imageContainer, options = {}) {
+        debugger;
         this.movies = movies
         this.element = imageContainer
         this.options = Object.assign({ slideToScroll: 7, slideVisible: 3 }, options)
@@ -115,7 +118,7 @@ class Carousel {
         this.ratio = this.movies.length / this.options.slideVisible
         this.root = this.createDivWithClass('carousel')
         this.container.style.width = (this.ratio * 100) + "%"
-        this.container.style.marginLeft = "35px"
+        this.container.style.marginLeft = "80px"
         this.root.appendChild(this.container)
         this.element.appendChild(this.root)
 
@@ -125,8 +128,8 @@ class Carousel {
 
     createCarouselStructure() {
         this.movies.forEach(async (movie) => {
+            debugger;
             const { title, image_url } = movie;
-            let dataMovie = await getMovie(movie.url);
 
             const divElement = this.createDivWithClass("carousel-item")
             divElement.style.width = ((100 / this.options.slideVisible) / this.ratio) + "%"
@@ -137,15 +140,16 @@ class Carousel {
             const imgElement = document.createElement("img");
             imgElement.src = image_url;
             imgElement.alt = "Image";
-            debugger;
-            imgElement.addEventListener("click", () => {
-                openModal(dataMovie);
-            });
 
             divElement.appendChild(pElement);
             divElement.appendChild(imgElement);
             this.container.appendChild(divElement);
             this.children.push(divElement);
+
+            const dataMovie = await getMovie(movie.url);
+            imgElement.addEventListener("click", () => {
+                openModal(dataMovie);
+            });
         });
     }
 
@@ -211,8 +215,8 @@ async function createCarousel(url, categorie) {
 
 
 createBestMovies()
-createCarousel(urlsBestDrama, "best-drama");
 createCarousel(urlsBestMovies, "best-movies");
+createCarousel(urlsBestDrama, "best-drama");
 createCarousel(urlsBestScifi, "best-scifi");
 createCarousel(urlsBestFantasy, "best-fantasy");
 

@@ -19,6 +19,10 @@
     color: #333;
 }
 
+p {
+    font-family: 'Custom Font', sans-serif;
+}
+
 .navbar-links {
     display: flex;
     align-items: center;
@@ -28,13 +32,25 @@
 
 /* Style pour la zone de la photo */
 #best-movie {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     text-align: center;
-    margin: 20px 0;
+    margin-left: 500px;
+    margin-right: 500px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f5f5f5;
 
 }
 
 body {
-    background-color: aqua;
+    background-color: rgb(89, 110, 198);
 }
 
 /* Style pour le carrousel */
@@ -42,10 +58,22 @@ body {
     position: relative;
     overflow: hidden;
     margin-left: 0px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 20px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f5f5f5;
 }
 
 .carousel-item {
     float: left;
+}
+
+.carousel-item img {
+    cursor: pointer;
 }
 
 .carousel-container {
@@ -87,12 +115,25 @@ body {
 
 }
 
-#openModalButton {
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    margin: 10px;
+#openModal {
+    display: block;
+    margin-top: 10px;
+    /* Adjust the margin-top value to shift the button down */
+    padding: 10px 20px;
+    background-color: #a0bbea;
+    /* Change the background color to your desired color */
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
 }
+
+#openModal:hover {
+    background-color: #475f94;
+    /* Change the hover background color to your desired color */
+}
+
 
 @font-face {
     font-family: 'Custom Font';
