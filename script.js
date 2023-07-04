@@ -56,7 +56,7 @@ function openModal(movie) {
     modalActors.textContent = movie.actors.join(", ");
     modalDuration.textContent = movie.duration;
     modalCountry.textContent = movie.countries.join(", ");
-    modalBoxOffice.textContent = movie.worldwide_gross_income;
+    modalBoxOffice.textContent = movie.worldwide_gross_income + "$";
     modalContainer.style.display = "block";
 
     // Event listener to close the modal when the close button is clicked
@@ -90,7 +90,7 @@ async function createBestMovies() {
 
     const openModalButton = document.createElement("button");
     openModalButton.id = "openModal";
-    openModalButton.textContent = "INFOS";
+    openModalButton.textContent = "MORE";
 
     container.appendChild(pElement);
     container.appendChild(imgElement);
@@ -108,7 +108,6 @@ class Carousel {
      * @param (Objet) options
     */
     constructor(movies, imageContainer, options = {}) {
-        debugger;
         this.movies = movies
         this.element = imageContainer
         this.options = Object.assign({ slideToScroll: 7, slideVisible: 3 }, options)
@@ -128,7 +127,6 @@ class Carousel {
 
     createCarouselStructure() {
         this.movies.forEach(async (movie) => {
-            debugger;
             const { title, image_url } = movie;
 
             const divElement = this.createDivWithClass("carousel-item")
@@ -173,7 +171,6 @@ class Carousel {
         this.container.style.transform = `translateX(${translateX}%)`;
     }
 
-
     createNavigation() {
         let nextButton = document.createElement("button");
         nextButton.textContent = "Next";
@@ -201,7 +198,6 @@ class Carousel {
     }
 }
 
-
 async function createCarousel(url, categorie) {
     let movies = await getMovies(url);
     let imageContainer = document.getElementById(categorie);
@@ -212,14 +208,9 @@ async function createCarousel(url, categorie) {
 }
 
 
-
-
 createBestMovies()
 createCarousel(urlsBestMovies, "best-movies");
 createCarousel(urlsBestDrama, "best-drama");
 createCarousel(urlsBestScifi, "best-scifi");
 createCarousel(urlsBestFantasy, "best-fantasy");
-
-
-
 

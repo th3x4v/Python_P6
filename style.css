@@ -30,6 +30,10 @@ p {
     /* Pour occuper tout l'espace disponible */
 }
 
+h2 {
+    background-color: #a0cdea;
+}
+
 /* Style pour la zone de la photo */
 #best-movie {
     display: flex;
@@ -54,6 +58,13 @@ body {
 }
 
 /* Style pour le carrousel */
+#best-movies,
+#best-drama,
+#best-fantasy,
+#best-scifi {
+    background-color: #a0cdea;
+}
+
 .carousel {
     position: relative;
     overflow: hidden;
@@ -61,11 +72,9 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    margin: 20px;
-    padding: 20px;
     border: 1px solid #ccc;
     border-radius: 5px;
-    background-color: #f5f5f5;
+    padding-bottom: 20px;
 }
 
 .carousel-item {
