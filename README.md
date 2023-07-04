@@ -12,7 +12,7 @@ https://github.com/OpenClassrooms-Student-Center/OCMovies-API-EN-FR
 
 - Ensuite, clonez ce repository dans le dossier JustStreamIt
 ```
-git clone https://github.com/FlorianMgs/OC_P6_JustStreamIt.git
+git clone https://github.com/th3x4v/Python_P6
 ```
 ## Utilisation:
 Ouvrez le fichier index.html dans un nouvel onglet de votre navigateur.
