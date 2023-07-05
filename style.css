@@ -1,26 +1,29 @@
 /* Style pour la barre d'accueil */
-.navbar {
+nav {
     background-color: #f1f1f1;
     padding: 10px;
     display: flex;
     align-items: center;
 }
 
-.navbar img {
+nav img {
     max-width: 50px;
     margin-left: 10px;
     /* Pour aligner le logo à droite */
     margin-right: auto;
 }
 
-.navbar a {
+nav a {
     margin-right: 50px;
     text-decoration: none;
     color: #333;
 }
 
+
 p {
     font-family: 'Custom Font', sans-serif;
+    height: 37px;
+    text-align: center;
 }
 
 .navbar-links {
@@ -68,17 +71,19 @@ body {
 .carousel {
     position: relative;
     overflow: hidden;
-    margin-left: 0px;
-    display: flex;
+    margin-left: 150px;
     flex-direction: column;
     justify-content: center;
     border: 1px solid #ccc;
     border-radius: 5px;
     padding-bottom: 20px;
+    width: 1088px;
+
 }
 
 .carousel-item {
     float: left;
+    margin-right: 72px;
 }
 
 .carousel-item img {
@@ -87,12 +92,14 @@ body {
 
 .carousel-container {
     transition: transform 0.3s ease-in-out;
+    overflow: hidden;
 }
 
 .carousel-next,
 .carousel-prev {
     position: absolute;
     top: 50%;
+    align-items: center;
     transform: translateY(-50%);
     background-color: rgba(0, 0, 0, 0.5);
     color: white;
@@ -102,11 +109,11 @@ body {
 }
 
 .carousel-next {
-    right: 10px;
+    right: 0px;
 }
 
 .carousel-prev {
-    left: 10px;
+    left: 0px;
 }
 
 /* CSS styles for the modal */

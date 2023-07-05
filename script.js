@@ -6,7 +6,6 @@ const urlsBestFantasy = "http://localhost:8000/api/v1/titles/?sort_by=-imdb_scor
 
 async function getData(url) {
     const response = await fetch(url);
-    console.log('response:>> ', response);
     if (!response.ok) {
         throw console.log("Une erreur est survenue lors de la requete. Code erreur:" +
             response.status
@@ -84,8 +83,8 @@ async function createBestMovies() {
     const imgElement = document.createElement("img");
     imgElement.src = dataMovie.image_url;
     imgElement.alt = "Image";
-    imgElement.style.width = '364px';
-    imgElement.style.height = '536px';
+    imgElement.style.width = '273px';
+    imgElement.style.height = '402px';
 
 
     const openModalButton = document.createElement("button");
@@ -107,17 +106,15 @@ class Carousel {
      * @param (HTMLElement) element
      * @param (Objet) options
     */
-    constructor(movies, imageContainer, options = {}) {
+    constructor(movies, imageContainer) {
         this.movies = movies
         this.element = imageContainer
-        this.options = Object.assign({ slideToScroll: 7, slideVisible: 3 }, options)
         this.container = this.createDivWithClass('carousel-container')
         this.children = [];
         this.currentItem = 0
-        this.ratio = this.movies.length / this.options.slideVisible
         this.root = this.createDivWithClass('carousel')
-        this.container.style.width = (this.ratio * 100) + "%"
-        this.container.style.marginLeft = "80px"
+        this.container.style.width = "2000px"
+        this.container.style.marginLeft = "72px"
         this.root.appendChild(this.container)
         this.element.appendChild(this.root)
 
@@ -130,14 +127,16 @@ class Carousel {
             const { title, image_url } = movie;
 
             const divElement = this.createDivWithClass("carousel-item")
-            divElement.style.width = ((100 / this.options.slideVisible) / this.ratio) + "%"
 
             const pElement = document.createElement("p");
             pElement.textContent = title;
+            pElement.style.width = '182px';
 
             const imgElement = document.createElement("img");
             imgElement.src = image_url;
             imgElement.alt = "Image";
+            imgElement.style.width = '182px';
+            imgElement.style.height = '268px';
 
             divElement.appendChild(pElement);
             divElement.appendChild(imgElement);
@@ -153,6 +152,9 @@ class Carousel {
 
     scrollToNextSlide() {
         this.currentItem++;
+        if (this.currentItem > 2) {
+            this.currentItem = 3;
+        }
         this.scrollToCurrentSlide();
     }
 
@@ -167,8 +169,9 @@ class Carousel {
 
     // Scroll to the current slide
     scrollToCurrentSlide() {
-        let translateX = this.currentItem * (-100 / this.children.length)
-        this.container.style.transform = `translateX(${translateX}%)`;
+        let translateX = this.currentItem * (-254)
+        //(-100 / this.children.length)
+        this.container.style.transform = `translateX(${translateX}px)`;
     }
 
     createNavigation() {
