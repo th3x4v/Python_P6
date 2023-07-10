@@ -22,8 +22,6 @@ nav a {
 
 p {
     font-family: 'Custom Font', sans-serif;
-    height: 37px;
-    text-align: center;
 }
 
 .navbar-links {
@@ -176,12 +174,12 @@ body {
     box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.4);
     float: right;
     height: 340px;
-    margin-right: 120px;
+    margin-right: 50px;
     margin-top: 1%;
 }
 
 #modalDescription {
-    margin-bottom: 10px;
+    margin-bottom: 15px;
 }
 
 #modalGenre,
@@ -193,7 +191,11 @@ body {
 #modalDuration,
 #modalCountry,
 #modalBoxOffice {
-    margin-bottom: 5px;
+    margin-bottom: 10px;
+}
+
+.modal-content p {
+    text-align: left;
 }
 
 .close {
