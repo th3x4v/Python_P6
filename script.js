@@ -4,6 +4,9 @@ const urlsBestScifi = "http://localhost:8000/api/v1/titles/?sort_by=-imdb_score&
 const urlsBestFantasy = "http://localhost:8000/api/v1/titles/?sort_by=-imdb_score&genre_contains=fantasy&page_size=15"
 
 
+/* The `getData` function is an asynchronous function that fetches data from a specified URL. It uses
+the `fetch` function to make a GET request to the URL and waits for the response using the `await`
+keyword. */
 async function getData(url) {
     const response = await fetch(url);
     if (!response.ok) {

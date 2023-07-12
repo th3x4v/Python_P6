@@ -84,6 +84,11 @@ body {
     margin-right: 72px;
 }
 
+.carousel-item p {
+    height: 30px;
+    text-align: center;
+}
+
 .carousel-item img {
     cursor: pointer;
 }
